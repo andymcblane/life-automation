@@ -3,6 +3,7 @@ name: Unraid Flash Backup
 on:
   schedule:
     - cron: '0 */12 * * *'  # Run every 12 hours
+  workflow_dispatch:
 
 jobs:
   backup:
@@ -13,6 +14,7 @@ jobs:
       PASSWORD: ${{ secrets.PASSWORD }}
       HUB_URL: http://192.168.1.101:4444/wd/hub
       WEB_URL: http://192.168.1.101
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
