@@ -45,7 +45,10 @@ try:
     time.sleep(5)
     download_button = driver.find_element(By.XPATH, '//span[text()="Download"]').click()
     time.sleep(30)
-    driver.quit()
+    try:
+        driver.quit()
+    except:
+        pass
 
 
     # Configurable values
