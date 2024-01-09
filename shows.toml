@@ -1,0 +1,175 @@
+[3rd-rock-from-the-sun]
+	[3rd-rock-from-the-sun.season-6]
+		active = true
+
+[the-block-podcast]
+    [the-block-podcast.season-1]
+	    active = false
+
+[the-block]
+#     [the-block.season-1]
+# 	    active = false
+#     [the-block.season-2]
+# 	    active = false
+# 	[the-block.season-3]
+# 	    active = false
+# 	[the-block.season-4]
+# 	    active = false
+# 	[the-block.season-5]
+# 	    active = false
+# 	[the-block.season-6]
+# 	    active = false
+# 	[the-block.all-stars]
+# 	    active = false
+# 	[the-block.sky-high]
+# 	    active = false
+# 	[the-block.fans-v-faves]
+# 	    active = false
+# 	[the-block.glasshouse]
+# 	    active = false
+# 	[the-block.triple-threat]
+# 	    active = false
+# 	[the-block.season-11]
+# 	    active = false
+# 	[the-block.season-12]
+# 	    active = false
+# 	[the-block.season-13]
+# 	    active = false
+# 	[the-block.season-14]
+# 	    active = false
+# 	[the-block.season-15]
+# 	    active = false
+# 	[the-block.season-16]
+# 	    active = false
+# 	[the-block.season-17]
+# 	    active = false
+	[the-block.season-18]
+	    active = false
+	# 2023
+	[the-block.season-19]
+	    active = false
+	# 2024
+	[the-block.season-20]
+	    active = true
+# [lego-masters]
+# 	[lego-masters.season-1]
+# 		active = false
+# 	[lego-masters.season-2]
+# 		active = false
+# 	[lego-masters.season-3]
+# 		active = false
+# 	[lego-masters.season-4]
+# 		active = false
+	# 2023
+	[lego-masters.season-5]
+	    active = false
+	# 2024
+	[lego-masters.season-6]
+	    active = true		
+
+[country-home-rescue-with-shaynna-blaze]
+	# 2022
+    [country-home-rescue-with-shaynna-blaze.season-1]
+        active = false
+		
+	# 2023
+    [country-home-rescue-with-shaynna-blaze.season-2]
+        active = false
+
+[lego-masters-bricksmas-specials]
+	[lego-masters-bricksmas-specials.2021]
+		active = false
+	[lego-masters-bricksmas-specials.season-2]
+		active = false
+	[lego-masters-bricksmas-specials.season-3]
+		active = false
+	[lego-masters-bricksmas-specials.season-4]
+		active = true		
+[australian-open-tennis]
+	[australian-open-tennis.2019]
+		active = false
+	[australian-open-tennis.2020]
+		active = false
+	[australian-open-tennis.2021]
+		active = false
+	[australian-open-tennis.2022]
+		active = false
+	[australian-open-tennis.2023]
+		active = false
+	[australian-open-tennis.2024]
+		active = true
+		
+[guess-whom-with-andy-lee]
+	[guess-whom-with-andy-lee.2020]
+		active = false
+	[guess-whom-with-andy-lee.2021]
+		active = false
+	[guess-whom-with-andy-lee.2022]
+		active = false
+	[guess-whom-with-andy-lee.2023]
+		active = false
+	[guess-whom-with-andy-lee.2024]
+		active = true
+		
+[nrl-premiership]
+	[nrl-premiership.2018]
+		active = false
+	[nrl-premiership.2019]
+		active = false
+	[nrl-premiership.2020]
+		active = false
+	[nrl-premiership.2021]
+		active = false
+	[nrl-premiership.2022]
+		active = false
+	[nrl-premiership.2023]
+		active = false
+	[nrl-premiership.2024]
+		active = true
+		
+[womens-nrl-premiership]
+	[womens-nrl-premiership.2019]
+		active = false
+	[womens-nrl-premiership.2020]
+		active = false
+	# Didn't happen? 
+	# [womens-nrl-premiership.2021]
+	# 	active = false
+	[womens-nrl-premiership.2022]
+		active = false
+	[womens-nrl-premiership.2023]
+		active = false
+	[womens-nrl-premiership.2024]
+		active = true
+		
+[state-of-origin]
+	[state-of-origin.2018]
+		active = false
+	[state-of-origin.2019]
+		active = false
+	[state-of-origin.2020]
+		active = false
+	[state-of-origin.2021]
+		active = false
+	[state-of-origin.2022]
+		active = false
+	[state-of-origin.2023]
+		active = false
+	[state-of-origin.2024]
+		active = true	
+# DRM protected		
+# [building-off-grid]
+# 	[building-off-grid.season-6]
+# 		active = true		
+
+# Episodes only kept up for 24 hours
+[nine-news-sydney]
+	[nine-news-sydney.2022]
+		active = false
+	[nine-news-sydney.2023]
+		active = false
+		
+# Episodes only kept up for 24 hours
+[9news-sydney]
+	[9news-sydney.season-2024]
+		active = true

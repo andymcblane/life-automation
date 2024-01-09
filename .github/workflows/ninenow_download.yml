@@ -1,0 +1,35 @@
+name: 9Now Downloader
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Run every hour
+  workflow_dispatch:
+
+jobs:
+  download:
+    runs-on:  self-hosted 
+
+    env:
+      PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+      PUSHOVER_APP: ${{ secrets.PUSHOVER_APP_NINENOW }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Install FFmpeg
+        run: |
+          apt-get -y update
+          apt-get -y upgrade
+          apt-get install -y ffmpeg
+
+      - name: Install Python dependencies
+        run: |
+          pip install yt-dlp
+          pip install toml
+          pip install git+https://github.com/Wyattjoh/pushover
+      - name: Run the script
+        run: |
+          python ninenow.py
