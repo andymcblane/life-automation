@@ -4,6 +4,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time 
 import os 
+import csv
+from datetime import datetime, timedelta
+from glob import glob
 
 driver = None
 
@@ -33,7 +36,6 @@ try:
     driver = webdriver.Remote(HUB_URL, options=chrome_options)
 
     driver.get(WEB_URL)
-    time.sleep(20)
 
     driver.find_element(By.NAME, "email").send_keys(USERNAME)
     driver.find_element(By.NAME, "password").send_keys(PASSWORD)
@@ -44,7 +46,54 @@ try:
     download_button = driver.find_element(By.XPATH, '//span[text()="Download"]').click()
     time.sleep(30)
     driver.quit()
-    # do some calc with the new file in /mnt/energy 
+
+
+    # Configurable values
+    cost_per_kwh = 0.37488 # Cost per kWh
+    tariff_hours = range(11, 14)  # Tariff hours (11am-2pm)
+
+    # Function to calculate cost based on tariff
+    def calculate_cost(consumption, timestamp):
+        hour = timestamp.hour
+        if hour in tariff_hours:
+            return 0
+        else:
+            return consumption * cost_per_kwh
+
+    # Directory containing downloaded files
+    download_directory = "/mnt/energy/"
+
+    # Find the most recently modified CSV file in the specified directory
+    csv_file_path = max(glob(os.path.join(download_directory, "*.csv")), key=os.path.getmtime)
+
+    # Read CSV file
+    with open(csv_file_path) as csvfile:
+        reader = csv.DictReader(csvfile)
+        
+        # Filter out "E2" records
+        filtered_records = [record for record in reader if record["Register"] != "E2"]
+
+        # Calculate energy usage for the previous two days
+        today = datetime.now().date()
+        two_days_ago = today - timedelta(days=2)
+
+        costs = {two_days_ago: 0, two_days_ago + timedelta(days=1): 0}
+        usages = {two_days_ago: 0, two_days_ago + timedelta(days=1): 0}
+
+        for record in filtered_records:
+            record_date = datetime.strptime(record["ReadDate"], "%Y/%m/%d").date()
+
+            if two_days_ago <= record_date <= today:
+                consumption = float(record["ReadConsumption"])
+                timestamp = datetime.strptime(record["ReadTime"], "%H:%M:%S")
+                cost = calculate_cost(consumption, timestamp)
+
+                costs[record_date] += cost
+                usages[record_date] += consumption
+
+        for day, cost in costs.items():
+            print(f"Day: {day}, Usage: {usages[day]:.5f} kWh, Cost: ${cost:.2f}")
+
 
 finally:
     if driver is not None:
