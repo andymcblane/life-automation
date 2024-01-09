@@ -1,12 +1,12 @@
-name: Unraid Flash Backup
+name: Unraid Export Diagnostics
 
 on:
   schedule:
-    - cron: '0 */12 * * *'  # Run every 12 hours
+    - cron: '0 0 * * *'  # Daily
   workflow_dispatch:
 
 jobs:
-  backup:
+  diagnostics:
     runs-on:  self-hosted 
 
     env:
@@ -25,5 +25,5 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install selenium
-      - name: Run Backup
-        run: python unraid/backup.py
+      - name: Run Export
+        run: python unraid/diagnostics.py
