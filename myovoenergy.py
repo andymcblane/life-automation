@@ -35,9 +35,9 @@ try:
     driver.get(WEB_URL)
     time.sleep(20)
 
-    driver.find_element_by_name("email").send_keys(USERNAME)
-    driver.find_element_by_name("password").send_keys(PASSWORD)
-    driver.find_element_by_name("password").submit()
+    driver.find_element(By.NAME, "email").send_keys(USERNAME)
+    driver.find_element(By.NAME, "password").send_keys(PASSWORD)
+    driver.find_element(By.NAME, "password").submit()
     time.sleep(10)
     driver.get(f"{WEB_URL}/usage")
     time.sleep(5)
