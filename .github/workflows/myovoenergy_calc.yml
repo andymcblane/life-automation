@@ -1,4 +1,4 @@
-name: Unraid Export Diagnostics
+name: MyOVOEnergy Downloader
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  diagnostics:
+  download:
     runs-on:  self-hosted 
 
     env:
