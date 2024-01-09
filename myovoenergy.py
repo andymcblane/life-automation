@@ -48,7 +48,7 @@ try:
     try:
         driver.quit()
     except:
-        pass
+        driver = None
 
 
     # Configurable values
@@ -76,12 +76,12 @@ try:
         # Filter out "E2" records
         filtered_records = [record for record in reader if record["Register"] != "E2"]
 
-        # Calculate energy usage for the previous two days
+         # Calculate energy usage and cost for the previous two days
         today = datetime.now().date()
         two_days_ago = today - timedelta(days=2)
 
-        costs = {two_days_ago: 0, two_days_ago + timedelta(days=1): 0}
-        usages = {two_days_ago: 0, two_days_ago + timedelta(days=1): 0}
+        costs = {two_days_ago: {"total": 0, "tariff_hours": 0}, two_days_ago + timedelta(days=1): {"total": 0, "tariff_hours": 0}}
+        usages = {two_days_ago: {"total": 0, "tariff_hours": 0}, two_days_ago + timedelta(days=1): {"total": 0, "tariff_hours": 0}}
 
         for record in filtered_records:
             record_date = datetime.strptime(record["ReadDate"], "%Y/%m/%d").date()
@@ -89,16 +89,33 @@ try:
             if two_days_ago <= record_date <= today:
                 consumption = float(record["ReadConsumption"])
                 timestamp = datetime.strptime(record["ReadTime"], "%H:%M:%S")
-                cost = calculate_cost(consumption, timestamp)
+                is_tariff_hour = timestamp.hour in tariff_hours
+
+                cost = calculate_cost(consumption, timestamp, is_tariff_hour)
+
                 if record_date not in costs:
-                            costs[record_date] = 0
-                            usages[record_date] = 0
+                    costs[record_date] = {"total": 0, "tariff_hours": 0}
+                    usages[record_date] = {"total": 0, "tariff_hours": 0}
 
-                costs[record_date] += cost
-                usages[record_date] += consumption
+                costs[record_date]["total"] += cost
+                usages[record_date]["total"] += consumption
 
-        for day, cost in costs.items():
-            print(f"Day: {day}, Usage: {usages[day]:.5f} kWh, Cost: ${cost:.2f}")
+                if is_tariff_hour:
+                    costs[record_date]["tariff_hours"] += cost
+                    usages[record_date]["tariff_hours"] += consumption
+
+        for day, cost_data in costs.items():
+            total_cost = cost_data["total"]
+            total_usage = usages[day]["total"]
+
+            tariff_cost = cost_data["tariff_hours"]
+            tariff_usage = usages[day]["tariff_hours"]
+
+            savings = total_cost - tariff_cost
+            print(f"Day: {day}, Total Usage: {total_usage:.5f} kWh, Total Cost: ${total_cost:.2f}")
+            print(f"   Tariff Hours Usage: {tariff_usage:.5f} kWh, Tariff Hours Cost: ${tariff_cost:.2f}")
+            print(f"   Savings during Tariff Hours: ${savings:.2f}")
+
 
 
 finally:
