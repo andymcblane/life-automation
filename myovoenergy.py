@@ -36,7 +36,7 @@ try:
     driver = webdriver.Remote(HUB_URL, options=chrome_options)
 
     driver.get(WEB_URL)
-
+    time.sleep(10)
     driver.find_element(By.NAME, "email").send_keys(USERNAME)
     driver.find_element(By.NAME, "password").send_keys(PASSWORD)
     driver.find_element(By.NAME, "password").submit()
