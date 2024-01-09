@@ -36,6 +36,7 @@ try:
     driver.find_element("xpath", "//input[@name='username']").send_keys(USERNAME)
     driver.find_element("xpath", "//input[@name='password']").send_keys(PASSWORD)
     driver.find_element("xpath", "//input[@name='password']").submit()
+    time.sleep(5)
     driver.get(f"{WEB_URL}/Tools/Diagnostics")
     time.sleep(5)
     driver.find_element("xpath", "//body").send_keys(Keys.END)
