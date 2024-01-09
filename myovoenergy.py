@@ -15,7 +15,7 @@ try:
 
     chrome_options = Options()
     chrome_options.add_experimental_option("prefs", {
-      "download.default_directory": "/mnt/energy",
+      "download.default_directory": "/mnt/energy/",
       "download.prompt_for_download": False,
       "download.directory_upgrade": True,
       "safebrowsing.enabled": True
