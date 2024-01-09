@@ -48,7 +48,7 @@ try:
     try:
         driver.quit()
     except:
-        driver = None
+        pass
 
 
     # Configurable values
@@ -57,7 +57,7 @@ try:
 
     def calculate_cost(consumption, timestamp, is_tariff_hour):
         if is_tariff_hour:
-            return 0
+            return consumption * cost_per_kwh
         else:
             return consumption * cost_per_kwh
 
@@ -118,4 +118,8 @@ try:
 
 finally:
     if driver is not None:
-        driver.quit()
+        try:
+            driver.quit()
+        except:
+            pass
+            
