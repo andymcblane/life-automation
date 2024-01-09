@@ -87,6 +87,9 @@ try:
                 consumption = float(record["ReadConsumption"])
                 timestamp = datetime.strptime(record["ReadTime"], "%H:%M:%S")
                 cost = calculate_cost(consumption, timestamp)
+                if record_date not in costs:
+                            costs[record_date] = 0
+                            usages[record_date] = 0
 
                 costs[record_date] += cost
                 usages[record_date] += consumption
