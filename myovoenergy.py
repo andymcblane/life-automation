@@ -55,10 +55,8 @@ try:
     cost_per_kwh = 0.37488 # Cost per kWh
     tariff_hours = range(11, 14)  # Tariff hours (11am-2pm)
 
-    # Function to calculate cost based on tariff
-    def calculate_cost(consumption, timestamp):
-        hour = timestamp.hour
-        if hour in tariff_hours:
+    def calculate_cost(consumption, timestamp, is_tariff_hour):
+        if is_tariff_hour:
             return 0
         else:
             return consumption * cost_per_kwh
