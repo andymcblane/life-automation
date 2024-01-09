@@ -1,0 +1,29 @@
+name: Unraid Export Diagnostics
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily TODO: when should be run for previous day?
+  workflow_dispatch:
+
+jobs:
+  diagnostics:
+    runs-on:  self-hosted 
+
+    env:
+      USERNAME: ${{ secrets.MYOVOENERGY_USERNAME }}
+      PASSWORD: ${{ secrets.MYOVOENERGY_PASSWORD }}
+      HUB_URL: http://192.168.1.101:4444/wd/hub
+      WEB_URL: https://my.ovoenergy.com.au
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium
+      - name: Download .csv and notify energy usage (+ cost)
+        run: python myovoenergy.py
